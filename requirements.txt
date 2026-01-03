@@ -1,0 +1,17 @@
+xgboost
+hyperopt
+matplotlib
+scikit-learn
+setuptools
+seaborn
+optuna
+openmeteo-requests
+requests-cache
+retry-requests
+spotipy
+geocoder
+geopy
+fastapi[standard]         
+streamlit
+tensorflow
+mlflow
