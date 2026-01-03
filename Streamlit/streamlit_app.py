@@ -28,8 +28,7 @@ def load_model():
         return model
     except:
         from joblib import dump, load
-        model_path = os.path.join("model", "model.joblib")
-        model = load(model_path)
+        model = load("model/model.joblib")
         print("Model loaded from local joblib file")
         return model
 
@@ -99,9 +98,13 @@ def make_prediction(model):
     })
 
 
-    pred_proba = model.predict_proba(X_pred)[0]
-    pred_class = int(pred_proba[1] > 0.5)  
-    risk_probability = round(pred_proba[1] * 100, 2)
+    if hasattr(model, "predict_proba"):
+        pred_proba = model.predict_proba(X_pred)[0][1]
+    else:
+        pred_proba = model.predict(X_pred)[0]
+
+    pred_class = int(pred_proba > 0.5)
+    risk_probability = round(pred_proba * 100, 2)
 
     st.session_state["pred"] = (pred_class, risk_probability)
 
